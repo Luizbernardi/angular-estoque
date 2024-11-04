@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Produto } from './produto';
 
@@ -7,10 +7,12 @@ import { Produto } from './produto';
   providedIn: 'root'
 })
 export class ProdutoService {
-  private baseURL = 'http://localhost:8080/api/v1/produtos';
-  constructor(private httpClient: HttpClient) { }
+
+  private baseUrl = 'http://localhost:8080/api/v1/produtos'; // URL da sua API REST
+
+  constructor(private http: HttpClient) { }
 
   getProdutoList(): Observable<Produto[]> {
-    return this.httpClient.get<Produto[]>('${this.baseURL}');
+    return this.http.get<Produto[]>(`${this.baseUrl}`);
   }
 }
