@@ -13,7 +13,7 @@ export class EstoqueService {
   constructor(private http: HttpClient) { }
 
   getEstoqueList(): Observable<Estoque[]> {
-    console.log('Chamando API para obter lista de produtos');
+    console.log('Chamando API para obter lista de Estoques');
     return this.http.get<Estoque[]>(`${this.baseUrl}`);
   }
 
