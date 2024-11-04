@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" th:fragment="navbar">
   <div class="container-fluid">
-      <a class="navbar-brand" >Estoque</a>
+      <a class="navbar-brand" routerLink="" >Estoque</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
@@ -11,9 +11,9 @@
                       Cadastro
                   </a>
                   <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" >Cadastro de Produto</a></li>
-                      <li><a class="dropdown-item" >Cadastro de Estoque</a></li>
-                      <li><a class="dropdown-item" >Cadastro Produto Estoque</a></li>
+                      <li><a class="dropdown-item" routerLink="cadastro-produto">Cadastro de Produto</a></li>
+                      <li><a class="dropdown-item" routerLink="cadastro-estoque">Cadastro de Estoque</a></li>
+                      <li><a class="dropdown-item" routerLink="cadastro-produto-estoque">Cadastro Produto Estoque</a></li>
                   </ul>
               </li>
               <li class="nav-item dropdown">
@@ -21,9 +21,9 @@
                       Listagem
                   </a>
                   <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" >Lista de Produtos</a></li>
-                      <li><a class="dropdown-item" >Lista de Estoques</a></li>
-                      <li><a class="dropdown-item" >Lista de Produtos em Estoque</a></li>
+                      <li><a class="dropdown-item " routerLink="/produtos-list" >Lista de Produtos</a></li>
+                      <li><a class="dropdown-item" routerLink="/estoques-list" >Lista de Estoques</a></li>
+                      <li><a class="dropdown-item" routerLink="/produtos-estoque-list" >Lista de Produtos em Estoque</a></li>
                   </ul>
               </li>
           </ul>
