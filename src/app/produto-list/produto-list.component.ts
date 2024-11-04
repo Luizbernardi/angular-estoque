@@ -5,21 +5,20 @@ import { Produto } from '../produto';
 @Component({
   selector: 'app-produto-list',
   templateUrl: './produto-list.component.html',
-  styleUrl: './produto-list.component.css'
+  styleUrls: ['./produto-list.component.css']
 })
 export class ProdutoListComponent implements OnInit {
 
   produtos: Produto[] = [];
 
-  constructor(private ProdutoService: ProdutoService ) { }
+  constructor(private produtoService: ProdutoService) { }
 
   ngOnInit(): void {
     this.getProdutos();
-
   }
 
-  private getProdutos(){
-    this.ProdutoService.getProdutoList().subscribe(data => {
+  private getProdutos() {
+    this.produtoService.getProdutoList().subscribe(data => {
       this.produtos = data;
     });
   }
