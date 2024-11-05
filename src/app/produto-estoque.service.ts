@@ -8,7 +8,7 @@ import { EstoqueProduto } from './estoque-produto';
 })
 export class ProdutoEstoqueService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/produto-estoques'; // URL da sua API REST
+  private baseUrl = 'http://localhost:8080/api/v1/estoque-produtos'; // URL da sua API REST
 
   constructor(private http: HttpClient) { }
 
