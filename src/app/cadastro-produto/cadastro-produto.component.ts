@@ -15,7 +15,7 @@ export class CadastroProdutoComponent implements OnInit {
   }
 
   onSubmit(){
-
+    console.log(this.produto);
   }
 
 }

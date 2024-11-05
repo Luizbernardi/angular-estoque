@@ -1,20 +1,20 @@
-<div class="container mt-5">
-  <h1>Cadastro de Produto</h1>
-  <form (ngSubmit) = "onSubmit()" >
+<div class="col-md-6 offset-md-3">
+  <div class="container mt-5">
+    <h1>Cadastro de Produto</h1>
+    <form (ngSubmit)="onSubmit()">
       <div class="mb-3">
-          <label for="nome" class="form-label">Nome do Produto:</label>
-          <input [(ngModel)]="produto.nome" maxlength="50"  type="text" id="nome" name="nome" class="form-control" required />
+        <label for="nome" class="form-label">Nome do Produto:</label>
+        <input [(ngModel)]="produto.nome" maxlength="50" type="text" id="nome" name="nome" class="form-control" required />
       </div>
       <div class="mb-3">
-          <label for="descricao" class="form-label">Descrição do Produto:</label>
-          <input [(ngModel)]="produto.descricao" maxlength="50"  type="text" id="descricao" name="descricao"  class="form-control" required />
+        <label for="descricao" class="form-label">Descrição do Produto:</label>
+        <input [(ngModel)]="produto.descricao" maxlength="50" type="text" id="descricao" name="descricao" class="form-control" required />
       </div>
       <div class="mb-3">
         <label for="preco" class="form-label">Preço do Produto:</label>
-        <input [(ngModel)]="produto.preco" type="text" id="preco" class="form-control" mask="separator.2" prefix="R$ " required />
+        <input [(ngModel)]="produto.preco" type="text" id="preco" name="preco" class="form-control" mask="separator.2" prefix="R$ " required />
       </div>
-      <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
-  </form>
-  <p class="mt-3"></p>
+      <button type="submit" class="btn btn-success">Cadastrar Produto</button>
+    </form>
+  </div>
 </div>
-
