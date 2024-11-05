@@ -1,20 +1,12 @@
 import { EstoqueProduto } from './estoque-produto';
 
 export class Produto {
-  id: number;
-  nome: string;
-  descricao: string;
-  preco: number;
-  estoqueProdutos: EstoqueProduto[];
-  dataEntrada: Date;
+  id: number | undefined;
+  nome: string | undefined;
+  descricao: string | undefined;
+  preco: number | undefined;
+  estoqueProdutos: EstoqueProduto[] | undefined;
+  dataEntrada: Date | undefined;
   precoFormatado?: string;
 
-  constructor(id: number, nome: string, descricao: string, preco: number, estoqueProdutos: EstoqueProduto[], dataEntrada: Date) {
-    this.id = id;
-    this.nome = nome;
-    this.descricao = descricao;
-    this.preco = preco;
-    this.estoqueProdutos = estoqueProdutos;
-    this.dataEntrada = dataEntrada;
-  }
 }

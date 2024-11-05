@@ -12,6 +12,8 @@ import { ProdutoEstoqueListComponent } from './produto-estoque-list/produto-esto
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
 import { CadastroEstoqueComponent } from './cadastro-estoque/cadastro-estoque.component';
 import { CadastroEstoqueProdutoComponent } from './cadastro-estoque-produto/cadastro-estoque-produto.component';
+import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { CadastroEstoqueProdutoComponent } from './cadastro-estoque-produto/cada
     ProdutoEstoqueListComponent,
     CadastroProdutoComponent,
     CadastroEstoqueComponent,
-    CadastroEstoqueProdutoComponent
+    CadastroEstoqueProdutoComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
