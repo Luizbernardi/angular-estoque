@@ -15,14 +15,14 @@
       <tbody>
           <tr *ngFor="let produtoEstoque of produtoEstoques; let i = index">
               <td>{{ produtoEstoque.id }}</td>
-              <td>{{ produtoEstoque.estoque.nome }}</td>
-              <td>{{ produtoEstoque.produto.nome }}</td>
+              <td>{{ produtoEstoque.estoque?.nome }}</td>
+              <td>{{ produtoEstoque.produto?.nome }}</td>
               <td>{{ produtoEstoque.quantidade }}</td>
-              <td>{{ produtoEstoque.produto.preco | currency:'BRL':'symbol':'1.2-2'  }}</td>
-              <td>{{ precosTotaisProdutos[i] | currency:'BRL':'symbol':'1.2-2' }}</td>
+              <td>{{ produtoEstoque.produto?.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR'  }}</td>
+              <td>{{ precosTotaisProdutos[i] | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
           </tr>
       </tbody>
   </table>
-  <h2>Preço total do estoque: {{ precoTotalEstoque }}</h2>
+  <h2>Preço total do estoque: {{ precoTotalEstoque | currency:'BRL':'symbol':'1.2-2':'pt-BR'  }}</h2>
 </div>
 

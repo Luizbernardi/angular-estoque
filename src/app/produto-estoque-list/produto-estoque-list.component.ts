@@ -19,16 +19,19 @@ export class ProdutoEstoqueListComponent implements OnInit {
     this.getProdutoEstoques();
   }
 
-   private getProdutoEstoques(): void {
+  private getProdutoEstoques(): void {
     this.produtoEstoqueService.getProdutoEstoqueList().subscribe(data => {
       this.produtoEstoques = data;
+      this.calcularPrecosTotais();
     });
   }
 
   private calcularPrecosTotais(): void {
     this.precoTotalEstoque = 0;
     this.precosTotaisProdutos = this.produtoEstoques.map(produtoEstoque => {
-      const precoTotal = produtoEstoque.quantidade * produtoEstoque.produto.preco;
+      const quantidade = produtoEstoque.quantidade ?? 0;
+      const preco = produtoEstoque.produto?.preco ?? 0;
+      const precoTotal = quantidade * preco;
       this.precoTotalEstoque += precoTotal;
       return precoTotal;
     });
