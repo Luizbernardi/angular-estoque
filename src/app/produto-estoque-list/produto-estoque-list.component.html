@@ -1,1 +1,28 @@
-<p>produto-estoque-list works!</p>
+<div class="container mt-5">
+  <h1>Lista de Produtos em Estoque</h1>
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nome do Estoque</th>
+              <th>Nome do Produto</th>
+              <th>Quantidade em Estoque</th>
+              <th>Preço Unidade R$</th>
+              <th>Preço total R$</th>
+              <th>Ações</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let produtoEstoque of produtoEstoques; let i = index">
+              <td>{{ produtoEstoque.id }}</td>
+              <td>{{ produtoEstoque.estoque.nome }}</td>
+              <td>{{ produtoEstoque.produto.nome }}</td>
+              <td>{{ produtoEstoque.quantidade }}</td>
+              <td>{{ produtoEstoque.produto.preco | currency:'BRL':'symbol':'1.2-2'  }}</td>
+              <td>{{ precosTotaisProdutos[i] | currency:'BRL':'symbol':'1.2-2' }}</td>
+          </tr>
+      </tbody>
+  </table>
+  <h2>Preço total do estoque: {{ precoTotalEstoque }}</h2>
+</div>
+

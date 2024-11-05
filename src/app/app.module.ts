@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { IndexComponent } from './index/index.component';
 import { EstoqueListComponent } from './estoque-list/estoque-list.component';
 import { ProdutoEstoqueListComponent } from './produto-estoque-list/produto-estoque-list.component';
+import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
+import { CadastroEstoqueComponent } from './cadastro-estoque/cadastro-estoque.component';
+import { CadastroEstoqueProdutoComponent } from './cadastro-estoque-produto/cadastro-estoque-produto.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ProdutoEstoqueListComponent } from './produto-estoque-list/produto-esto
     NavbarComponent,
     IndexComponent,
     EstoqueListComponent,
-    ProdutoEstoqueListComponent
+    ProdutoEstoqueListComponent,
+    CadastroProdutoComponent,
+    CadastroEstoqueComponent,
+    CadastroEstoqueProdutoComponent
   ],
   imports: [
     BrowserModule,
