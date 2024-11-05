@@ -20,7 +20,7 @@ export class ProdutoEstoqueListComponent implements OnInit {
   }
 
   private getProdutoEstoques(): void {
-    this.produtoEstoqueService.getProdutoEstoqueList().subscribe(data => {
+    this.produtoEstoqueService.getEstoqueProdutoList().subscribe(data => {
       this.produtoEstoques = data;
       this.calcularPrecosTotais();
     });

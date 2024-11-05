@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EstoqueProduto } from './estoque-produto';
 
@@ -12,8 +12,11 @@ export class ProdutoEstoqueService {
 
   constructor(private http: HttpClient) { }
 
-  getProdutoEstoqueList(): Observable<EstoqueProduto[]> {
-    console.log('Chamando API para obter lista de ProdutoEstoques');
+  createEstoqueProduto(estoqueProduto: EstoqueProduto): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, estoqueProduto);
+  }
+
+  getEstoqueProdutoList(): Observable<EstoqueProduto[]> {
     return this.http.get<EstoqueProduto[]>(`${this.baseUrl}`);
   }
 }
