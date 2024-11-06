@@ -4,18 +4,19 @@
       <thead>
           <tr>
               <th>ID</th>
-              <th>Nome do Estoque</th>
-              <th>Nome do Produto</th>
-              <th>Quantidade em Estoque</th>
-              <th>Preço Unidade R$</th>
-              <th>Preço total R$</th>
-              <th>Ações</th>
+              <th>Nome do estoque</th>
+              <th>Preço total estoque R$</th>
+              <th>Nome do produto</th>
+              <th>Quantidade em estoque</th>
+              <th>Preço unidade R$</th>
+              <th>Preço total do produto R$</th>
           </tr>
       </thead>
       <tbody>
           <tr *ngFor="let produtoEstoque of produtoEstoques; let i = index">
               <td>{{ produtoEstoque.id }}</td>
               <td>{{ produtoEstoque.estoque?.nome }}</td>
+              <td>{{ calcularTotalEstoque(produtoEstoque.estoque?.id ?? 0) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
               <td>{{ produtoEstoque.produto?.nome }}</td>
               <td>{{ produtoEstoque.quantidade }}</td>
               <td>{{ produtoEstoque.produto?.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR'  }}</td>
@@ -23,6 +24,6 @@
           </tr>
       </tbody>
   </table>
-  <h2>Preço total do estoque: {{ precoTotalEstoque | currency:'BRL':'symbol':'1.2-2':'pt-BR'  }}</h2>
+  <h2>Preço total todos os estoques: {{ precoTotalEstoque | currency:'BRL':'symbol':'1.2-2':'pt-BR'  }}</h2>
 </div>
 

@@ -17,6 +17,7 @@ export class ProdutoEstoqueListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProdutoEstoques();
+
   }
 
   private getProdutoEstoques(): void {
@@ -36,5 +37,12 @@ export class ProdutoEstoqueListComponent implements OnInit {
       return precoTotal;
     });
   }
+
+  calcularTotalEstoque(estoqueId: number): number {
+    return this.produtoEstoques
+      .filter(produtoEstoque => produtoEstoque.estoque?.id === estoqueId)
+      .reduce((total, produtoEstoque) => total + (produtoEstoque.quantidade ?? 0) * (produtoEstoque.produto?.preco ?? 0), 0);
+  }
+
 
 }
