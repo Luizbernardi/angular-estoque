@@ -1,22 +1,22 @@
-<div class="container ">
-  <h2>Estoque list</h2>
-  <table class="table table-striped">
-    <thead>
+<div class="container">
+  <h2 class=" mb-4">Lista de Estoques</h2>
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
         <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Ações</th>
+          <th class="col-2">ID</th>
+          <th class="col-6">Nome</th>
+          <th class="col-4">Ações</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr *ngFor="let estoque of estoques">
-          <td><a [routerLink]="['/estoques', estoque.id]">{{ estoque.id }}</a></td>
-          <td>{{ estoque.nome }}</td>
-          <td>
-              <button *ngIf="estoque.id !== undefined" (click)="updateEstoque(estoque.id)" class="btn btn-info">Update</button>
-              <button *ngIf="estoque.id !== undefined" (click)="confirmDelete(estoque.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
-            </td>
+          <td class="col-2"><a [routerLink]="['/estoques', estoque.id]">{{ estoque.id }}</a></td>
+          <td class="col-6">{{ estoque.nome }}</td>
+          <td class="col-4">
+            <button *ngIf="estoque.id !== undefined" (click)="updateEstoque(estoque.id)" class="btn btn-info btn-sm">Update</button>
+            <button *ngIf="estoque.id !== undefined" (click)="confirmDelete(estoque.id)" class="btn btn-danger btn-sm ms-2">Delete</button>
+          </td>
         </tr>
-    </tbody>
-  </table>
-  </div>
+      </tbody>
+    </table>
+</div>
