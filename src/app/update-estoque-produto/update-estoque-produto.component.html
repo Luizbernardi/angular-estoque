@@ -1,12 +1,14 @@
 <div class="col-md-6 offset-md-3">
   <div class="container mt-5">
-    <h1>Cadastro de Produto em Estoque</h1>
+    <h1>Editar Produto em Estoque</h1>
     <form (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="quantidade" class="form-label">Quantidade:</label>
         <input [(ngModel)]="estoqueProduto.quantidade" min="1" max="100" type="number" id="quantidade" name="quantidade" class="form-control" required/>
       </div>
-      <button type="submit" class="btn btn-success">Cadastrar Produto no Estoque</button>
+      <button type="submit" class="btn btn-success">Salvar</button>
+      <a [routerLink]="['/produtos-estoque-list']" class="btn btn-secondary ms-2">Cancelar</a>
+
     </form>
   </div>
 </div>
