@@ -17,6 +17,10 @@ export class ProdutoService {
     return this.http.get<Produto[]>(`${this.baseUrl}`);
   }
 
+  getProdutoById(id: number): Observable<Produto> {
+    return this.http.get<Produto>(`${this.baseUrl}/${id}`);
+  }
+
   createProduto(produto: Produto): Observable<Object> {
     console.log('Chamando API para criar um novo produto');
     return this.http.post(`${this.baseUrl}`, produto);

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EstoqueProduto } from './estoque-produto';
+import { Produto } from './produto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ export class ProdutoEstoqueService {
 
   constructor(private http: HttpClient) { }
 
+
+
   createEstoqueProduto(estoqueProduto: EstoqueProduto): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, estoqueProduto);
   }
 
-  getEstoqueProdutoList(): Observable<EstoqueProduto[]> {
+  getProdutoEstoqueList(): Observable<EstoqueProduto[]> {
     return this.http.get<EstoqueProduto[]>(`${this.baseUrl}`);
   }
 }

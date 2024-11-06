@@ -7,6 +7,8 @@ import { EstoqueListComponent } from './estoque-list/estoque-list.component';
 import { ProdutoEstoqueListComponent } from './produto-estoque-list/produto-estoque-list.component';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
 import { CadastroEstoqueProdutoComponent } from './cadastro-estoque-produto/cadastro-estoque-produto.component';
+import { EstoqueIdComponent } from './estoque-id/estoque-id.component';
+import { ProdutoIdComponent } from './produto-id/produto-id.component';
 
 const routes: Routes = [
   {path: 'produtos-list' , component: ProdutoListComponent},
@@ -16,10 +18,9 @@ const routes: Routes = [
   {path: 'produtos-estoque-list', component: ProdutoEstoqueListComponent},
   {path: 'cadastro-produto', component: CadastroProdutoComponent},
   {path: 'cadastro-estoque', component: CadastroEstoqueComponent},
-  {path: 'cadastro-estoque-produto', component: CadastroEstoqueProdutoComponent}
-
-
-
+  {path: 'cadastro-estoque-produto', component: CadastroEstoqueProdutoComponent},
+  {path: 'estoques/:id', component: EstoqueIdComponent },
+  {path: 'produtos/:id', component: ProdutoIdComponent },
 
 ];
 

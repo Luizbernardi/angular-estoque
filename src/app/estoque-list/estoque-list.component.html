@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Produto list</h2>
+  <h2>Estoque list</h2>
   <table class="table table-striped">
     <thead>
         <tr>
@@ -9,7 +9,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let estoque of estoques">
-            <td>{{ estoque.id }}</td>
+          <td><a [routerLink]="['/estoques', estoque.id]">{{ estoque.id }}</a></td>
             <td>{{ estoque.nome }}</td>
         </tr>
     </tbody>

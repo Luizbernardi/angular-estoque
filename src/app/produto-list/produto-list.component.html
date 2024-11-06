@@ -1,22 +1,22 @@
 <div class="container">
-<h2>Produto list</h2>
-<table class="table table-striped">
-  <thead>
-      <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Preço</th>
-          <th>Ações</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let produto of produtos">
-          <td>{{ produto.id }}</td>
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.descricao }}</td>
-          <td>{{ produto.preco  | currency:'BRL':'symbol':'1.2-2':'pt-BR'   }} </td>
-      </tr>
-  </tbody>
-</table>
+  <h2>Lista de Produtos</h2>
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let produto of produtos">
+            <td><a [routerLink]="['/produtos', produto.id]">{{ produto.id }}</a></td>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.descricao }}</td>
+            <td>{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+        </tr>
+    </tbody>
+  </table>
 </div>

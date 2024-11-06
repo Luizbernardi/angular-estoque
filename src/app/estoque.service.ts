@@ -17,6 +17,10 @@ export class EstoqueService {
     return this.http.get<Estoque[]>(`${this.baseUrl}`);
   }
 
+  getEstoqueById(id: number): Observable<Estoque> {
+    return this.http.get<Estoque>(`${this.baseUrl}/${id}`);
+  }
+
   createEstoque(estoque: Estoque): Observable<Object> {
     console.log('Chamando API para criar um novo estoque');
     return this.http.post(`${this.baseUrl}`, estoque);

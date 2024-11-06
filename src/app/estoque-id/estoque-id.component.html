@@ -1,0 +1,11 @@
+<div class="container mt-5">
+  <h1>Detalhes do Estoque</h1>
+  <div class="card">
+      <div class="card-body">
+          <p class="card-text"><strong>ID:</strong> {{ estoque?.id }}</p>
+          <p class="card-text"><strong>Nome:</strong> {{ estoque?.nome }}</p>
+          <p class="card-text"><strong>Data de Entrada:</strong> {{ estoque?.dataEntrada | date:'dd/MM/yyyy' }}</p>
+      </div>
+  </div>
+  <a [routerLink]="['/estoques-list']" class="btn btn-secondary mt-3">Voltar</a>
+</div>

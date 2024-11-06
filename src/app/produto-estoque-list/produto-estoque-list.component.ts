@@ -21,7 +21,7 @@ export class ProdutoEstoqueListComponent implements OnInit {
   }
 
   private getProdutoEstoques(): void {
-    this.produtoEstoqueService.getEstoqueProdutoList().subscribe(data => {
+    this.produtoEstoqueService.getProdutoEstoqueList().subscribe(data => {
       this.produtoEstoques = data;
       this.calcularPrecosTotais();
     });
