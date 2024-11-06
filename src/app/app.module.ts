@@ -15,6 +15,7 @@ import { CadastroEstoqueProdutoComponent } from './cadastro-estoque-produto/cada
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxPaginationModule } from 'ngx-pagination';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { EstoqueIdComponent } from './estoque-id/estoque-id.component';
@@ -49,7 +50,8 @@ registerLocaleData(localePt, 'pt-BR');
     HttpClientModule,
     FormsModule,
     NgxMaskPipe,
-    NgxMaskDirective
+    NgxMaskDirective,
+    NgxPaginationModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'
    }, provideNgxMask()],

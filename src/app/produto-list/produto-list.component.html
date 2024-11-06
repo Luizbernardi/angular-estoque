@@ -1,26 +1,31 @@
-<div class="container">
-  <h2>Lista de Produtos</h2>
-  <table class="table table-striped table-bordered">
-    <thead>
+<div class="container ">
+  <h2 >Lista de Produtos</h2>
+  <div class="table-responsive" style="min-height: 520px;"> <!-- Defina uma altura mínima para o contêiner -->
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
         <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Ações</th>
+          <th class="col-2">ID</th>
+          <th class="col-3">Nome</th>
+          <th class="col-3">Descrição</th>
+          <th class="col-2">Preço</th>
+          <th class="col-2">Ações</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let produto of produtos">
-            <td><a [routerLink]="['/produtos', produto.id]">{{ produto.id }}</a></td>
-            <td>{{ produto.nome }}</td>
-            <td>{{ produto.descricao }}</td>
-            <td>{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
-            <td>
-              <button *ngIf="produto.id !== undefined" (click)="updateProduto(produto.id)" class="btn btn-info">Update</button>
-              <button *ngIf="produto.id !== undefined" (click)="confirmDelete(produto.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
-            </td>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+          <td class="col-2"><a [routerLink]="['/produtos', produto.id]">{{ produto.id }}</a></td>
+          <td class="col-3">{{ produto.nome }}</td>
+          <td class="col-3">{{ produto.descricao }}</td>
+          <td class="col-2">{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+          <td class="col-2">
+            <button *ngIf="produto.id !== undefined" (click)="updateProduto(produto.id)" class="btn btn-info btn-sm">Update</button>
+            <button *ngIf="produto.id !== undefined" (click)="confirmDelete(produto.id)" class="btn btn-danger btn-sm ms-2">Delete</button>
+          </td>
         </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
 </div>

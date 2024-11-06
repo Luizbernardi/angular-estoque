@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Lista de Produtos em Estoque</h1>
-
+  <div class="table-responsive" style="min-height: 464px;">
   <table class="table table-striped table-bordered">
       <thead>
           <tr>
@@ -15,8 +15,8 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let produtoEstoque of produtoEstoques; let i = index">
-              <td>{{ produtoEstoque.id }}</td>
+        <tr *ngFor="let produtoEstoque of produtoEstoques | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index">
+          <td>{{ produtoEstoque.id }}</td>
               <td>{{ produtoEstoque.estoque?.nome }}</td>
               <td>{{ calcularTotalEstoque(produtoEstoque.estoque?.id ?? 0) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
               <td>{{ produtoEstoque.produto?.nome }}</td>
@@ -30,6 +30,10 @@
           </tr>
       </tbody>
   </table>
+</div>
   <h2>Preço total todos os estoques: {{ precoTotalEstoque | currency:'BRL':'symbol':'1.2-2':'pt-BR'  }}</h2>
+  <div class="text-center">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
 </div>
 

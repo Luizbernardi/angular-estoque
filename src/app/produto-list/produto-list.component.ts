@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class ProdutoListComponent implements OnInit {
 
   produtos: Produto[] = [];
+  page: number = 1;
+  itemsPerPage: number = 9;
 
   constructor(private produtoService: ProdutoService,
    private router: Router

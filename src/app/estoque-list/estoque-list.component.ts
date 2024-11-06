@@ -1,3 +1,4 @@
+import { Page } from './../../../node_modules/ngx-pagination/lib/pagination-controls.directive.d';
 import { EstoqueService } from './../estoque.service';
 import { Estoque } from './../estoque';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +13,9 @@ import { Router } from '@angular/router';
 export class EstoqueListComponent implements OnInit {
 
   estoques: Estoque[] = [];
+  page: number = 1;
+  itemsPerPage: number = 9;
+
 
   constructor(private estoqueService: EstoqueService,
     private router: Router
