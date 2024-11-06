@@ -19,6 +19,9 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { EstoqueIdComponent } from './estoque-id/estoque-id.component';
 import { ProdutoIdComponent } from './produto-id/produto-id.component';
+import { UpdateEstoqueComponent } from './update-estoque/update-estoque.component';
+import { UpdateProdutoComponent } from './update-produto/update-produto.component';
+import { UpdateEstoqueProdutoComponent } from './update-estoque-produto/update-estoque-produto.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -36,6 +39,9 @@ registerLocaleData(localePt, 'pt-BR');
     FooterComponent,
     EstoqueIdComponent,
     ProdutoIdComponent,
+    UpdateEstoqueComponent,
+    UpdateProdutoComponent,
+    UpdateEstoqueProdutoComponent,
   ],
   imports: [
     BrowserModule,
