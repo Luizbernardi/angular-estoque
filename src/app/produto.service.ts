@@ -25,4 +25,13 @@ export class ProdutoService {
     console.log('Chamando API para criar um novo produto');
     return this.http.post(`${this.baseUrl}`, produto);
   }
+
+  updateProduto(id: number, produto: Produto): Observable<Object> {
+    return this.http.patch(`${this.baseUrl}/${id}`, produto);
+  }
+
+  deleteProduto(id: number): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
 }

@@ -5,12 +5,16 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let estoque of estoques">
           <td><a [routerLink]="['/estoques', estoque.id]">{{ estoque.id }}</a></td>
-            <td>{{ estoque.nome }}</td>
+          <td>{{ estoque.nome }}</td>
+          <td>
+              <button *ngIf="estoque.id !== undefined" (click)="updateEstoque(estoque.id)" class="btn btn-info">Update</button>
+            </td>
         </tr>
     </tbody>
   </table>

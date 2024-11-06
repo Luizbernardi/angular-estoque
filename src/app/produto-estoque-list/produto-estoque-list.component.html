@@ -10,6 +10,7 @@
               <th>Quantidade em estoque</th>
               <th>Preço unidade R$</th>
               <th>Preço total do produto R$</th>
+              <th>Ações</th>
           </tr>
       </thead>
       <tbody>
@@ -21,6 +22,9 @@
               <td>{{ produtoEstoque.quantidade }}</td>
               <td>{{ produtoEstoque.produto?.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR'  }}</td>
               <td>{{ precosTotaisProdutos[i] | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+              <td>
+                <button *ngIf="produtoEstoque.id !== undefined" (click)="updateProdutoEstoque(produtoEstoque.id)" class="btn btn-info">Update</button>
+              </td>
           </tr>
       </tbody>
   </table>

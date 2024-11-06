@@ -26,4 +26,12 @@ export class EstoqueService {
     return this.http.post(`${this.baseUrl}`, estoque);
   }
 
+  updateEstoque(id: number, estoque: Estoque): Observable<Object> {
+    return this.http.patch(`${this.baseUrl}/${id}`, estoque);
+  }
+
+  deleteEstoque(id: number): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
 }

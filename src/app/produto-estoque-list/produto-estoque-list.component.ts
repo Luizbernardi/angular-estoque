@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProdutoEstoqueService } from '../produto-estoque.service';
 import { EstoqueProduto } from './../estoque-produto';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,9 @@ export class ProdutoEstoqueListComponent implements OnInit {
   precoTotalEstoque: number = 0;
   precosTotaisProdutos: number[] = [];
 
-  constructor(private produtoEstoqueService: ProdutoEstoqueService ) { }
+  constructor(private produtoEstoqueService: ProdutoEstoqueService,
+    private router: Router
+   ) { }
 
   ngOnInit(): void {
     this.getProdutoEstoques();
@@ -43,6 +46,11 @@ export class ProdutoEstoqueListComponent implements OnInit {
       .filter(produtoEstoque => produtoEstoque.estoque?.id === estoqueId)
       .reduce((total, produtoEstoque) => total + (produtoEstoque.quantidade ?? 0) * (produtoEstoque.produto?.preco ?? 0), 0);
   }
+
+  updateProdutoEstoque(id: number){
+    this.router.navigate(['update-estoque-produtos', id]);
+  }
+
 
 
 }

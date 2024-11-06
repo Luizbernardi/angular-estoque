@@ -1,6 +1,7 @@
 import { EstoqueService } from './../estoque.service';
 import { Estoque } from './../estoque';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,9 @@ export class EstoqueListComponent implements OnInit {
 
   estoques: Estoque[] = [];
 
-  constructor(private estoqueService: EstoqueService ) { }
+  constructor(private estoqueService: EstoqueService,
+    private router: Router
+   ) { }
 
   ngOnInit(): void {
     this.getEstoques();
@@ -22,6 +25,10 @@ export class EstoqueListComponent implements OnInit {
     this.estoqueService.getEstoqueList().subscribe(data => {
       this.estoques = data;
     });
+  }
+
+  updateEstoque(id: number){
+    this.router.navigate(['update-estoques', id]);
   }
 
 
