@@ -22,4 +22,17 @@ export class ProdutoEstoqueService {
   getProdutoEstoqueList(): Observable<EstoqueProduto[]> {
     return this.http.get<EstoqueProduto[]>(`${this.baseUrl}`);
   }
+
+  getEstoqueProdutoById(id: number): Observable<EstoqueProduto> {
+    return this.http.get<EstoqueProduto>(`${this.baseUrl}/${id}`);
+  }
+
+  updateEstoqueProduto(id: number, estoqueProduto: EstoqueProduto): Observable<Object> {
+    return this.http.patch(`${this.baseUrl}/${id}`, estoqueProduto);
+  }
+
+  deleteEstoqueProduto(id: number): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
 }
