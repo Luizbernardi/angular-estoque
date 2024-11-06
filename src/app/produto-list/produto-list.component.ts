@@ -30,4 +30,17 @@ export class ProdutoListComponent implements OnInit {
     this.router.navigate(['update-produtos', id]);
   }
 
+  deleteProduto(id: number){
+    this.produtoService.deleteProduto(id).subscribe(data => {
+      console.log(data);
+      this.getProdutos();
+    });
+  }
+
+  confirmDelete(id: number): void {
+    if (confirm('Tem certeza que deseja excluir este Produto?')) {
+      this.deleteProduto(id);
+    }
+
+}
 }

@@ -31,6 +31,19 @@ export class EstoqueListComponent implements OnInit {
     this.router.navigate(['update-estoques', id]);
   }
 
+  deleteEstoque(id: number){
+    this.estoqueService.deleteEstoque(id).subscribe(data => {
+      console.log(data);
+      this.getEstoques();
+    })
+  }
+
+  confirmDelete(id: number): void {
+    if (confirm('Tem certeza que deseja excluir este estoque?')) {
+      this.deleteEstoque(id);
+    }
+  }
+
 
 
 }

@@ -18,6 +18,7 @@
             <td>{{ produto.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
             <td>
               <button *ngIf="produto.id !== undefined" (click)="updateProduto(produto.id)" class="btn btn-info">Update</button>
+              <button *ngIf="produto.id !== undefined" (click)="confirmDelete(produto.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
             </td>
         </tr>
     </tbody>
