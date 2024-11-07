@@ -12,7 +12,7 @@
       </div>
       <div class="mb-3">
         <label for="preco" class="form-label">Preço do Produto:</label>
-        <input [(ngModel)]="produto.preco" type="text" id="preco" name="preco" class="form-control" mask="separator.2" prefix="R$ " required />
+        <input [(ngModel)]="produto.preco" type="text" id="preco" min="0.01" max="1000000" name="preco" class="form-control" mask="separator.2" prefix="R$ " required />
       </div>
       <button type="submit" class="btn btn-success">Cadastrar Produto</button>
     </form>

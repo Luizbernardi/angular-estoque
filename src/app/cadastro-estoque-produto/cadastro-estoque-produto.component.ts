@@ -45,7 +45,10 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
   }
 
   saveEstoqueProduto(): void {
-    console.log(this.estoqueProduto);
+    if (this.estoqueProduto.quantidade < 1 || this.estoqueProduto.quantidade > 100) {
+      alert('A quantidade deve estar entre 1 e 100.');
+      return;
+    }
     this.produtoEstoqueService.createEstoqueProduto(this.estoqueProduto).subscribe(data => {
       console.log(data);
       this.goToEstoqueProdutoList();
@@ -57,7 +60,6 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.estoqueProduto);
     this.saveEstoqueProduto();
   }
 }

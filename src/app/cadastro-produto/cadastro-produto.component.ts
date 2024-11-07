@@ -17,6 +17,10 @@ export class CadastroProdutoComponent implements OnInit {
   }
 
   saveProduto(){
+    if (this.produto?.preco !== undefined && (this.produto.preco < 0.01 || this.produto.preco > 1000000)) {
+      alert('O preço deve estar entre R$ 0,01 e R$ 1.000.000,00.');
+      return;
+    }
     this.produtoService.createProduto(this.produto).subscribe(data => {
       console.log(data);
       this.goToProdutoList();
