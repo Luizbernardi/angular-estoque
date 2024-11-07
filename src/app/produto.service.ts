@@ -34,4 +34,8 @@ export class ProdutoService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
+  findAllMatches(termo: string): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${this.baseUrl}/search?termo=${termo}`);
+  }
+
 }

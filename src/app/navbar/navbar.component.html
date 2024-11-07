@@ -27,9 +27,9 @@
                   </ul>
               </li>
           </ul>
-          <form class="d-flex" role="search"  method="get">
-              <input class="form-control me-2" type="search" name="nome" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+          <form class="d-flex" (ngSubmit)="onSearch()">
+            <input [(ngModel)]="termo" name="termo" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
       </div>
   </div>
