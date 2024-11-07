@@ -16,7 +16,7 @@ export class ProdutoService {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get(`${this.baseUrl}`, { params });
+    return this.http.get<any>(`${this.baseUrl}`, { params });
   }
 
   getProdutoById(id: number): Observable<Produto> {
@@ -41,7 +41,7 @@ export class ProdutoService {
       .set('termo', termo)
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get(`${this.baseUrl}/search`, { params });
+    return this.http.get<any>(`${this.baseUrl}/search`, { params });
   }
 
 }

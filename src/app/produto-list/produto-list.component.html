@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let produto of produtos">
+        <tr *ngFor="let produto of produtos | paginate: { id: 'produto-pagination', itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalElements }">
           <td><a [routerLink]="['/produtos', produto.id]">{{ produto.id }}</a></td>
           <td>{{ produto.nome }}</td>
           <td>{{ produto.descricao }}</td>
@@ -31,12 +31,12 @@
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3">
     <div class="mb-2 mb-md-0">
       <label for="itemsPerPage" class="form-label">Itens por página:</label>
-      <select [(ngModel)]="itemsPerPage" id="itemsPerPage" class="form-select" style="width: auto; display: inline-block;">
+      <select [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()" id="itemsPerPage" class="form-select" style="width: auto; display: inline-block;">
         <option *ngFor="let option of [5, 10, 15, 20]" [value]="option">{{ option }}</option>
       </select>
     </div>
     <div class="d-flex justify-content-center flex-grow-1">
-      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+      <pagination-controls id="produto-pagination" (pageChange)="onPageChange($event)"></pagination-controls>
     </div>
   </div>
 </div>

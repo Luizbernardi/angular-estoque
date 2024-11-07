@@ -1,7 +1,7 @@
-import { EstoqueService } from './../estoque.service';
-import { Estoque } from './../estoque';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EstoqueService } from '../estoque.service';
+import { Estoque } from '../estoque';
 
 @Component({
   selector: 'app-estoque-list',
@@ -15,15 +15,14 @@ export class EstoqueListComponent implements OnInit {
   itemsPerPage: number = 10;
   totalElements: number = 0;
 
-  constructor(private estoqueService: EstoqueService,
-              private router: Router) { }
+  constructor(private estoqueService: EstoqueService, private router: Router) { }
 
   ngOnInit(): void {
     this.getEstoques();
   }
 
   private getEstoques(): void {
-    this.estoqueService.getEstoqueListPage(this.page - 1, this.itemsPerPage).subscribe(data => {
+    this.estoqueService.getEstoqueListPage(this.page - 1, this.itemsPerPage).subscribe((data: any) => {
       this.estoques = data.content;
       this.totalElements = data.totalElements;
     });
@@ -46,9 +45,13 @@ export class EstoqueListComponent implements OnInit {
     }
   }
 
-  onPageChange(event: any): void {
-    this.page = event.page;
-    this.itemsPerPage = event.itemsPerPage;
+  onPageChange(event: number): void {
+    this.page = event;
+    this.getEstoques();
+  }
+
+  onItemsPerPageChange(): void {
+    this.page = 1; // Reset to first page
     this.getEstoques();
   }
 }

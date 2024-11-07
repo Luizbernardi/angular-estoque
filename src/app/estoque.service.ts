@@ -16,7 +16,7 @@ export class EstoqueService {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get(`${this.baseUrl}`, { params });
+    return this.http.get<any>(`${this.baseUrl}`, { params });
   }
 
   getEstoqueById(id: number): Observable<Estoque> {

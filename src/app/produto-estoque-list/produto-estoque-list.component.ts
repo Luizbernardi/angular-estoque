@@ -10,65 +10,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProdutoEstoqueListComponent implements OnInit {
 
+  produtoEstoques: EstoqueProduto[] = [];
+  allProdutoEstoques: EstoqueProduto[] = [];
   page: number = 1;
   itemsPerPage: number = 10;
   totalElements: number = 0;
-  produtoEstoques: EstoqueProduto[] = [];
-  precoTotalEstoque: number = 0;
   precosTotaisProdutos: number[] = [];
+  precoTotalEstoque: number = 0;
 
-  constructor(private produtoEstoqueService: ProdutoEstoqueService,
-              private router: Router) { }
+  constructor(private produtoEstoqueService: ProdutoEstoqueService, private router: Router) { }
 
   ngOnInit(): void {
     this.getProdutoEstoques();
+    this.getAllProdutoEstoques();
   }
 
   private getProdutoEstoques(): void {
-    this.produtoEstoqueService.getEstoqueProdutoList(this.page - 1, this.itemsPerPage).subscribe(data => {
+    this.produtoEstoqueService.getProdutoEstoqueListPage(this.page - 1, this.itemsPerPage).subscribe((data: any) => {
       this.produtoEstoques = data.content;
       this.totalElements = data.totalElements;
       this.calcularPrecosTotais();
     });
   }
 
-  private calcularPrecosTotais(): void {
-    this.precoTotalEstoque = 0;
-    this.precosTotaisProdutos = this.produtoEstoques.map(produtoEstoque => {
-      const quantidade = produtoEstoque.quantidade ?? 0;
-      const preco = produtoEstoque.produto?.preco ?? 0;
-      const precoTotal = quantidade * preco;
-      this.precoTotalEstoque += precoTotal;
-      return precoTotal;
+  private getAllProdutoEstoques(): void {
+    this.produtoEstoqueService.getAllProdutoEstoque().subscribe((data: EstoqueProduto[]) => {
+      this.allProdutoEstoques = data;
+      this.calcularPrecoTotalEstoque();
     });
   }
 
-  calcularTotalEstoque(estoqueId: number): number {
-    return this.produtoEstoques
-      .filter(produtoEstoque => produtoEstoque.estoque?.id === estoqueId)
-      .reduce((total, produtoEstoque) => total + (produtoEstoque.quantidade ?? 0) * (produtoEstoque.produto?.preco ?? 0), 0);
+  calcularPrecosTotais(): void {
+    this.precosTotaisProdutos = this.produtoEstoques.map(pe => (pe.quantidade ?? 0) * ((pe.produto?.preco ?? 0)));
   }
 
-  updateProdutoEstoque(id: number){
+  calcularPrecoTotalEstoque(): void {
+    this.precoTotalEstoque = this.allProdutoEstoques.reduce((acc, pe) => acc + (pe.quantidade ?? 0) * ((pe.produto?.preco ?? 0)), 0);
+  }
+
+  calcularTotalEstoque(estoqueId: number): number {
+    const estoques = this.allProdutoEstoques.filter(pe => pe.estoque && pe.estoque.id === estoqueId);
+    return estoques.reduce((acc, pe) => acc + (pe.quantidade ?? 0) * (pe.produto?.preco ?? 0), 0);
+  }
+
+  updateProdutoEstoque(id: number): void {
     this.router.navigate(['update-estoque-produtos', id]);
   }
 
-  deleteProdutoEstoque(id: number){
+  deleteProdutoEstoque(id: number): void {
     this.produtoEstoqueService.deleteEstoqueProduto(id).subscribe(data => {
       console.log(data);
       this.getProdutoEstoques();
+      this.getAllProdutoEstoques();
     });
   }
 
   confirmDelete(id: number): void {
-    if (confirm('Tem certeza que deseja excluir este Estoque Produto?')) {
+    if (confirm('Tem certeza que deseja excluir este produto do estoque?')) {
       this.deleteProdutoEstoque(id);
     }
   }
 
-  onPageChange(event: any): void {
-    this.page = event.page;
-    this.itemsPerPage = event.itemsPerPage;
+  onPageChange(event: number): void {
+    this.page = event;
+    this.getProdutoEstoques();
+  }
+
+  onItemsPerPageChange(): void {
+    this.page = 1; // Reset to first page
     this.getProdutoEstoques();
   }
 }

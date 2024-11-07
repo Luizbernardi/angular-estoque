@@ -19,14 +19,17 @@ export class ProdutoEstoqueService {
     return this.http.post(`${this.baseUrl}`, estoqueProduto);
   }
 
-
-
-  getEstoqueProdutoList(page: number, size: number): Observable<any> {
+  getProdutoEstoqueListPage(page: number, size: number): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
-    return this.http.get(`${this.baseUrl}`, { params });
+    return this.http.get<any>(`${this.baseUrl}`, { params });
   }
+
+  getAllProdutoEstoque(): Observable<EstoqueProduto[]> {
+    return this.http.get<EstoqueProduto[]>(`${this.baseUrl}/all`);
+  }
+
 
 
 
