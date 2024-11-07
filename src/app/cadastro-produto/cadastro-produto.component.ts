@@ -17,6 +17,10 @@ export class CadastroProdutoComponent implements OnInit {
   }
 
   saveProduto(){
+    if (!this.produto.nome || !this.produto.descricao || this.produto.preco == null) {
+      alert('Todos os campos são obrigatórios.');
+      return;
+    }
     if (this.produto?.preco !== undefined && (this.produto.preco < 0.01 || this.produto.preco > 1000000)) {
       alert('O preço deve estar entre R$ 0,01 e R$ 1.000.000,00.');
       return;

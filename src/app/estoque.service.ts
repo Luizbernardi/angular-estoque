@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EstoqueService {
 
-   private baseUrl = 'http://localhost:8080/api/v1/estoques'; // URL da sua API REST
+   private baseUrl = 'http://localhost:8080/api/v1/estoques';
 
   constructor(private http: HttpClient) { }
 

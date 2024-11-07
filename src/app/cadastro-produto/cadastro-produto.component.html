@@ -4,15 +4,15 @@
     <form (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="nome" class="form-label">Nome do Produto:</label>
-        <input [(ngModel)]="produto.nome" maxlength="50" type="text" id="nome" name="nome" class="form-control" required />
+        <input [(ngModel)]="produto.nome" minlength="1" maxlength="50" type="text" id="nome" name="nome" class="form-control" required />
       </div>
       <div class="mb-3">
         <label for="descricao" class="form-label">Descrição do Produto:</label>
-        <input [(ngModel)]="produto.descricao" maxlength="50" type="text" id="descricao" name="descricao" class="form-control" required />
+        <input [(ngModel)]="produto.descricao" minlength="1" maxlength="50" type="text" id="descricao" name="descricao" class="form-control" required />
       </div>
       <div class="mb-3">
         <label for="preco" class="form-label">Preço do Produto:</label>
-        <input [(ngModel)]="produto.preco" type="text" id="preco" min="0.01" max="1000000" name="preco" class="form-control" mask="separator.2" prefix="R$ " required />
+        <input [(ngModel)]="produto.preco" type="number" id="preco" min="0.01" max="1000000" name="preco" class="form-control" required />
       </div>
       <button type="submit" class="btn btn-success">Cadastrar Produto</button>
     </form>
