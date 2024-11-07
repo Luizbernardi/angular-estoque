@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Estoque } from './estoque';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstoqueService {
 
-   private baseUrl = 'http://localhost:8080/api/v1/estoques';
+   private baseUrl = 'http://localhost:8080/api/v1/estoque/estoques';
 
   constructor(private http: HttpClient) { }
 
-  getEstoqueList(): Observable<Estoque[]> {
-    console.log('Chamando API para obter lista de Estoques');
-    return this.http.get<Estoque[]>(`${this.baseUrl}`);
+  getEstoqueListPage(page: number, size: number): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get(`${this.baseUrl}`, { params });
   }
 
   getEstoqueById(id: number): Observable<Estoque> {

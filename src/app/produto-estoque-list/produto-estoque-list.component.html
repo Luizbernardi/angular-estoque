@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let produtoEstoque of produtoEstoques | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index">
+        <tr *ngFor="let produtoEstoque of produtoEstoques; let i = index">
           <td><a [routerLink]="['/produtos-estoque', produtoEstoque.id]">{{ produtoEstoque.id }}</a></td>
           <td>{{ produtoEstoque.estoque?.nome }}</td>
           <td>{{ calcularTotalEstoque(produtoEstoque.estoque?.id ?? 0) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
@@ -43,7 +43,7 @@
       </select>
     </div>
     <div class="d-flex justify-content-center flex-grow-1">
-      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
     </div>
   </div>
 </div>

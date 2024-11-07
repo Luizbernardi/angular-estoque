@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Produto } from './produto';
 
@@ -8,13 +8,15 @@ import { Produto } from './produto';
 })
 export class ProdutoService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/produtos'; // URL da sua API REST
+  private baseUrl = 'http://localhost:8080/api/v1/produto/produtos'; // URL da sua API REST
 
   constructor(private http: HttpClient) { }
 
-  getProdutoList(): Observable<Produto[]> {
-    console.log('Chamando API para obter lista de produtos');
-    return this.http.get<Produto[]>(`${this.baseUrl}`);
+  getProdutoListPage(page: number, size: number): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get(`${this.baseUrl}`, { params });
   }
 
   getProdutoById(id: number): Observable<Produto> {
@@ -34,8 +36,12 @@ export class ProdutoService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
-  findAllMatches(termo: string): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.baseUrl}/search?termo=${termo}`);
+  findAllMatches(termo: string, page: number, size: number): Observable<any> {
+    let params = new HttpParams()
+      .set('termo', termo)
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get(`${this.baseUrl}/search`, { params });
   }
 
 }

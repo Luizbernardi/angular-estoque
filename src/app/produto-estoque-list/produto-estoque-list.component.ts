@@ -6,28 +6,28 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-produto-estoque-list',
   templateUrl: './produto-estoque-list.component.html',
-  styleUrl: './produto-estoque-list.component.css'
+  styleUrls: ['./produto-estoque-list.component.css']
 })
 export class ProdutoEstoqueListComponent implements OnInit {
 
   page: number = 1;
   itemsPerPage: number = 10;
+  totalElements: number = 0;
   produtoEstoques: EstoqueProduto[] = [];
   precoTotalEstoque: number = 0;
   precosTotaisProdutos: number[] = [];
 
   constructor(private produtoEstoqueService: ProdutoEstoqueService,
-    private router: Router
-   ) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getProdutoEstoques();
-
   }
 
   private getProdutoEstoques(): void {
-    this.produtoEstoqueService.getProdutoEstoqueList().subscribe(data => {
-      this.produtoEstoques = data;
+    this.produtoEstoqueService.getEstoqueProdutoList(this.page - 1, this.itemsPerPage).subscribe(data => {
+      this.produtoEstoques = data.content;
+      this.totalElements = data.totalElements;
       this.calcularPrecosTotais();
     });
   }
@@ -66,6 +66,9 @@ export class ProdutoEstoqueListComponent implements OnInit {
     }
   }
 
-
-
+  onPageChange(event: any): void {
+    this.page = event.page;
+    this.itemsPerPage = event.itemsPerPage;
+    this.getProdutoEstoques();
+  }
 }

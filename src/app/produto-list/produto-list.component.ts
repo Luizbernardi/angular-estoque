@@ -11,20 +11,21 @@ import { Router } from '@angular/router';
 export class ProdutoListComponent implements OnInit {
 
   produtos: Produto[] = [];
-  page: number = 1;
+  page: number = 0;
   itemsPerPage: number = 10;
+  totalElements: number = 0;
 
   constructor(private produtoService: ProdutoService,
-   private router: Router
-  ) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getProdutos();
   }
 
   private getProdutos() {
-    this.produtoService.getProdutoList().subscribe(data => {
-      this.produtos = data;
+    this.produtoService.getProdutoListPage(this.page, this.itemsPerPage).subscribe(data => {
+      this.produtos = data.content;
+      this.totalElements = data.totalElements;
     });
   }
 
@@ -43,6 +44,11 @@ export class ProdutoListComponent implements OnInit {
     if (confirm('Tem certeza que deseja excluir este Produto?')) {
       this.deleteProduto(id);
     }
+  }
 
-}
+  onPageChange(event: any): void {
+    this.page = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
+    this.getProdutos();
+  }
 }

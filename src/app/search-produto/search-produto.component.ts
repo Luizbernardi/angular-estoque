@@ -12,22 +12,25 @@ export class SearchProdutoComponent implements OnInit {
 
   produtos: Produto[] = [];
   termo: string = '';
-  page: number = 1;
+  page: number = 0;
   itemsPerPage: number = 10;
+  totalElements: number = 0;
 
   constructor(private produtoService: ProdutoService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.termo = params['termo'] || '';
+      this.page = params['page'] ? +params['page'] : 0;
       this.searchProdutos();
     });
   }
 
   searchProdutos(): void {
     if (this.termo.trim()) {
-      this.produtoService.findAllMatches(this.termo).subscribe(data => {
-        this.produtos = data;
+      this.produtoService.findAllMatches(this.termo, this.page, this.itemsPerPage).subscribe(data => {
+        this.produtos = data.content;
+        this.totalElements = data.totalElements;
         console.log(this.produtos); // Printar a lista de produtos no console
       }, error => {
         console.log(error);
@@ -38,7 +41,14 @@ export class SearchProdutoComponent implements OnInit {
   }
 
   onSearch(): void {
-    this.router.navigate(['/search-produtos'], { queryParams: { termo: this.termo } });
+    this.page = 0;
+    this.router.navigate(['/search-produtos'], { queryParams: { termo: this.termo, page: this.page } });
+  }
+
+  onPageChange(event: any): void {
+    this.page = event.pageIndex;
+    this.itemsPerPage = event.pageSize;
+    this.router.navigate(['/search-produtos'], { queryParams: { termo: this.termo, page: this.page } });
   }
 
   updateProduto(id: number): void {

@@ -19,6 +19,9 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
     produtoId: null,
     quantidade: null
   };
+  page: number = 1;
+  itemsPerPage: number = 10;
+  totalElements: number = 0;
 
   constructor(
     private produtoEstoqueService: ProdutoEstoqueService,
@@ -33,14 +36,16 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
   }
 
   loadEstoques(): void {
-    this.estoqueService.getEstoqueList().subscribe(data => {
-      this.estoques = data;
+    this.estoqueService.getEstoqueListPage(this.page - 1, this.itemsPerPage).subscribe((data: any) => {
+      this.estoques = data.content;
+      this.totalElements = data.totalElements;
     });
   }
 
   loadProdutos(): void {
-    this.produtoService.getProdutoList().subscribe(data => {
-      this.produtos = data;
+    this.produtoService.getProdutoListPage(this.page - 1, this.itemsPerPage).subscribe((data: any) => {
+      this.produtos = data.content;
+      this.totalElements = data.totalElements;
     });
   }
 
@@ -55,11 +60,19 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
     },
     (error: any) => console.log(error));
   }
+
   goToEstoqueProdutoList(): void {
     this.router.navigate(['/produtos-estoque-list']);
   }
 
   onSubmit(): void {
     this.saveEstoqueProduto();
+  }
+
+  onPageChange(event: any): void {
+    this.page = event.page;
+    this.itemsPerPage = event.itemsPerPage;
+    this.loadEstoques();
+    this.loadProdutos();
   }
 }

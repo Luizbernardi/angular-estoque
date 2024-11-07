@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EstoqueProduto } from './estoque-produto';
 import { Produto } from './produto';
@@ -9,7 +9,7 @@ import { Produto } from './produto';
 })
 export class ProdutoEstoqueService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/estoque-produtos'; // URL da sua API REST
+  private baseUrl = 'http://localhost:8080/api/v1/estoque-produto/estoque-produtos'; // URL da sua API REST
 
   constructor(private http: HttpClient) { }
 
@@ -19,9 +19,16 @@ export class ProdutoEstoqueService {
     return this.http.post(`${this.baseUrl}`, estoqueProduto);
   }
 
-  getProdutoEstoqueList(): Observable<EstoqueProduto[]> {
-    return this.http.get<EstoqueProduto[]>(`${this.baseUrl}`);
+
+
+  getEstoqueProdutoList(page: number, size: number): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get(`${this.baseUrl}`, { params });
   }
+
+
 
   getEstoqueProdutoById(id: number): Observable<EstoqueProduto> {
     return this.http.get<EstoqueProduto>(`${this.baseUrl}/${id}`);
