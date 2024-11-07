@@ -14,7 +14,7 @@ export class EstoqueListComponent implements OnInit {
 
   estoques: Estoque[] = [];
   page: number = 1;
-  itemsPerPage: number = 9;
+  itemsPerPage: number = 10;
 
 
   constructor(private estoqueService: EstoqueService,

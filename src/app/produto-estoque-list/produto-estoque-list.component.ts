@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProdutoEstoqueListComponent implements OnInit {
 
   page: number = 1;
-  itemsPerPage: number = 7;
+  itemsPerPage: number = 10;
   produtoEstoques: EstoqueProduto[] = [];
   precoTotalEstoque: number = 0;
   precosTotaisProdutos: number[] = [];

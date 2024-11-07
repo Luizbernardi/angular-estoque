@@ -12,7 +12,7 @@ export class ProdutoListComponent implements OnInit {
 
   produtos: Produto[] = [];
   page: number = 1;
-  itemsPerPage: number = 9;
+  itemsPerPage: number = 10;
 
   constructor(private produtoService: ProdutoService,
    private router: Router

@@ -13,7 +13,7 @@ export class SearchProdutoComponent implements OnInit {
   produtos: Produto[] = [];
   termo: string = '';
   page: number = 1;
-  itemsPerPage: number = 9;
+  itemsPerPage: number = 10;
 
   constructor(private produtoService: ProdutoService, private route: ActivatedRoute, private router: Router) { }
 
