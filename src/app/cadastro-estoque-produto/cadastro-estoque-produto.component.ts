@@ -1,9 +1,13 @@
-import { EstoqueService } from './../estoque.service';
-import { ProdutoEstoqueService } from './../produto-estoque.service';
-import { EstoqueProduto } from './../estoque-produto';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EstoqueService } from '../estoque.service';
 import { ProdutoService } from '../produto.service';
+import { ProdutoEstoqueService } from '../produto-estoque.service';
+import { EstoqueProduto } from '../estoque-produto';
+import { Produto } from '../produto';
+import { Estoque } from '../estoque';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro-estoque-produto',
@@ -12,16 +16,11 @@ import { ProdutoService } from '../produto.service';
 })
 export class CadastroEstoqueProdutoComponent implements OnInit {
 
-  estoques: any[] = [];
-  produtos: any[] = [];
-  estoqueProduto: any = {
-    estoqueId: null,
-    produtoId: null,
-    quantidade: null
-  };
-  page: number = 1;
-  itemsPerPage: number = 10;
-  totalElements: number = 0;
+  estoques: Estoque[] = [];
+  produtos: Produto[] = [];
+  estoqueProduto: EstoqueProduto = new EstoqueProduto();
+  private searchEstoqueTerms = new Subject<string>();
+  private searchProdutoTerms = new Subject<string>();
 
   constructor(
     private produtoEstoqueService: ProdutoEstoqueService,
@@ -31,26 +30,42 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadEstoques();
-    this.loadProdutos();
-  }
+    this.searchEstoqueTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term => this.estoqueService.searchEstoques(term))
+    ).subscribe(data => {
+      this.estoques = this.filterUniqueByName(data);
+    });
 
-  loadEstoques(): void {
-    this.estoqueService.getEstoqueListPage(this.page - 1, this.itemsPerPage).subscribe((data: any) => {
-      this.estoques = data.content;
-      this.totalElements = data.totalElements;
+    this.searchProdutoTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term => this.produtoService.searchProdutos(term))
+    ).subscribe(data => {
+      this.produtos = this.filterUniqueByName(data);
     });
   }
 
-  loadProdutos(): void {
-    this.produtoService.getProdutoListPage(this.page - 1, this.itemsPerPage).subscribe((data: any) => {
-      this.produtos = data.content;
-      this.totalElements = data.totalElements;
-    });
+  searchEstoque(term: string): void {
+    this.searchEstoqueTerms.next(term);
+  }
+
+  searchProduto(term: string): void {
+    this.searchProdutoTerms.next(term);
+  }
+
+  filterUniqueByName(items: any[]): any[] {
+    const uniqueItems = items.filter((item, index, self) =>
+      index === self.findIndex((t) => (
+        t.nome === item.nome
+      ))
+    );
+    return uniqueItems;
   }
 
   saveEstoqueProduto(): void {
-    if (this.estoqueProduto.quantidade < 1 || this.estoqueProduto.quantidade > 100) {
+    if (this.estoqueProduto.quantidade === undefined || this.estoqueProduto.quantidade < 1 || this.estoqueProduto.quantidade > 100) {
       alert('A quantidade deve estar entre 1 e 100.');
       return;
     }
@@ -69,10 +84,13 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
     this.saveEstoqueProduto();
   }
 
-  onPageChange(event: any): void {
-    this.page = event.page;
-    this.itemsPerPage = event.itemsPerPage;
-    this.loadEstoques();
-    this.loadProdutos();
+  onEstoqueInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchEstoque(input.value);
+  }
+
+  onProdutoInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchProduto(input.value);
   }
 }

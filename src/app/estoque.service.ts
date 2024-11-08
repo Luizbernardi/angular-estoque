@@ -36,4 +36,10 @@ export class EstoqueService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
+  searchEstoques(term: string): Observable<any> {
+    let params = new HttpParams()
+      .set('termo', term);
+    return this.http.get<any>(`${this.baseUrl}/search-cadastro`, { params });
+  }
+
 }

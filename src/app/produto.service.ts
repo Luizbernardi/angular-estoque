@@ -44,4 +44,11 @@ export class ProdutoService {
     return this.http.get<any>(`${this.baseUrl}/search`, { params });
   }
 
+  searchProdutos(termo: string): Observable<any> {
+    let params = new HttpParams()
+      .set('termo', termo);
+    return this.http.get<any>(`${this.baseUrl}/search-cadastro`, { params });
+  }
+
+
 }

@@ -30,9 +30,6 @@ export class ProdutoEstoqueService {
     return this.http.get<EstoqueProduto[]>(`${this.baseUrl}/all`);
   }
 
-
-
-
   getEstoqueProdutoById(id: number): Observable<EstoqueProduto> {
     return this.http.get<EstoqueProduto>(`${this.baseUrl}/${id}`);
   }

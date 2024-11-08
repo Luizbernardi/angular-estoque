@@ -4,13 +4,15 @@
     <form (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="estoque" class="form-label">Selecione o Estoque:</label>
-        <select id="estoque" [(ngModel)]="estoqueProduto.estoqueId" name="estoqueId" class="form-select" required>
+        <input id="estoque" (input)="onEstoqueInput($event)" class="form-control" placeholder="Digite para buscar estoques...">
+        <select [(ngModel)]="estoqueProduto.estoqueId" name="estoqueId" class="form-select" required>
           <option *ngFor="let estoque of estoques" [value]="estoque.id">{{ estoque.nome }}</option>
         </select>
       </div>
       <div class="mb-3">
         <label for="produto" class="form-label">Selecione o Produto:</label>
-        <select id="produto" [(ngModel)]="estoqueProduto.produtoId" name="produtoId" class="form-select" required>
+        <input id="produto" (input)="onProdutoInput($event)" class="form-control" placeholder="Digite para buscar produtos...">
+        <select [(ngModel)]="estoqueProduto.produtoId" name="produtoId" class="form-select" required>
           <option *ngFor="let produto of produtos" [value]="produto.id">{{ produto.nome }}</option>
         </select>
       </div>
