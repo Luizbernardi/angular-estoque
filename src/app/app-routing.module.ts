@@ -13,6 +13,7 @@ import { UpdateEstoqueComponent } from './update-estoque/update-estoque.componen
 import { UpdateProdutoComponent } from './update-produto/update-produto.component';
 import { UpdateEstoqueProdutoComponent } from './update-estoque-produto/update-estoque-produto.component';
 import { SearchProdutoComponent } from './search-produto/search-produto.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: 'produtos-list' , component: ProdutoListComponent},
@@ -20,7 +21,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'estoques-list', component: EstoqueListComponent},
   {path: 'produtos-estoque-list', component: ProdutoEstoqueListComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent},
   {path: 'cadastro-produto', component: CadastroProdutoComponent},
   {path: 'cadastro-estoque', component: CadastroEstoqueComponent},
   {path: 'cadastro-estoque-produto', component: CadastroEstoqueProdutoComponent},

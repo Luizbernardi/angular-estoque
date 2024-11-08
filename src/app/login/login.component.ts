@@ -1,4 +1,3 @@
-import { AuthService } from './../auth-service.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,12 +10,15 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private router: Router) { }
 
   onSubmit(): void {
-    if (this.authService.login(this.username, this.password)) {
-      const redirectUrl = this.authService.getRedirectUrl();
-      this.router.navigate([redirectUrl]);
+    // Simulação de autenticação
+    if (this.username === 'admin' && this.password === 'admin') {
+      // Armazene o estado de login (simulação)
+      localStorage.setItem('isLoggedIn', 'true');
+      // Redirecione para a página de cadastro de produto
+      this.router.navigate(['/cadastro-produto']);
     } else {
       alert('Login inválido');
     }

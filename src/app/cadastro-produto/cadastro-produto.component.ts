@@ -2,7 +2,6 @@ import { ProdutoService } from './../produto.service';
 import { Component, OnInit } from '@angular/core';
 import { Produto } from '../produto';
 import { Router } from '@angular/router';
-import { AuthService } from './../auth-service.service';
 
 @Component({
   selector: 'app-cadastro-produto',
@@ -15,14 +14,16 @@ export class CadastroProdutoComponent implements OnInit {
   constructor(
     private produtoService: ProdutoService,
     private router: Router,
-    private authService: AuthService
   ) { }
 
     ngOnInit(): void {
-      if (!this.authService.isLoggedIn()) {
-        this.authService.setRedirectUrl(this.router.url);
-        this.router.navigate(['/login']);
-      }
+      // Verifique se o usuário está logado
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn !== 'true') {
+      // Redirecione para a página de login se não estiver logado
+      this.router.navigate(['/login']);
+    }
+
   }
 
   saveProduto(){
