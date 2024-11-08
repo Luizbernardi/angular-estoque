@@ -2,6 +2,7 @@ import { ProdutoService } from './../produto.service';
 import { Component, OnInit } from '@angular/core';
 import { Produto } from '../produto';
 import { Router } from '@angular/router';
+import { AuthService } from './../auth-service.service';
 
 @Component({
   selector: 'app-cadastro-produto',
@@ -11,9 +12,17 @@ import { Router } from '@angular/router';
 export class CadastroProdutoComponent implements OnInit {
 
   produto: Produto = new Produto();
-  constructor(private produtoService: ProdutoService, private router: Router) { }
+  constructor(
+    private produtoService: ProdutoService,
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+      if (!this.authService.isLoggedIn()) {
+        this.authService.setRedirectUrl(this.router.url);
+        this.router.navigate(['/login']);
+      }
   }
 
   saveProduto(){

@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'estoques-list', component: EstoqueListComponent},
   {path: 'produtos-estoque-list', component: ProdutoEstoqueListComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'cadastro-produto', component: CadastroProdutoComponent},
   {path: 'cadastro-estoque', component: CadastroEstoqueComponent},
   {path: 'cadastro-estoque-produto', component: CadastroEstoqueProdutoComponent},

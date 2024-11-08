@@ -8,6 +8,7 @@ import { Produto } from '../produto';
 import { Estoque } from '../estoque';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthService } from './../auth-service.service';
 
 @Component({
   selector: 'app-cadastro-estoque-produto',
@@ -26,10 +27,18 @@ export class CadastroEstoqueProdutoComponent implements OnInit {
     private produtoEstoqueService: ProdutoEstoqueService,
     private router: Router,
     private estoqueService: EstoqueService,
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+
+
+    if (!this.authService.isLoggedIn()) {
+        this.authService.setRedirectUrl(this.router.url);
+        this.router.navigate(['/login']);
+      }
+
     this.searchEstoqueTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),

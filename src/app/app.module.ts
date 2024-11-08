@@ -24,6 +24,7 @@ import { UpdateEstoqueComponent } from './update-estoque/update-estoque.componen
 import { UpdateProdutoComponent } from './update-produto/update-produto.component';
 import { UpdateEstoqueProdutoComponent } from './update-estoque-produto/update-estoque-produto.component';
 import { SearchProdutoComponent } from './search-produto/search-produto.component';
+import { LoginComponent } from './login/login.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -45,6 +46,7 @@ registerLocaleData(localePt, 'pt-BR');
     UpdateProdutoComponent,
     UpdateEstoqueProdutoComponent,
     SearchProdutoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

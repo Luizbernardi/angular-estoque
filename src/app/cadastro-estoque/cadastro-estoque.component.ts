@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EstoqueService } from '../estoque.service';
 import { Estoque } from '../estoque';
 import { Router } from '@angular/router';
+import { AuthService } from './../auth-service.service';
 
 @Component({
   selector: 'app-cadastro-estoque',
@@ -13,9 +14,15 @@ export class CadastroEstoqueComponent implements OnInit {
   estoque: Estoque = new Estoque();
   message: string = '';
 
-  constructor(private estoqueService: EstoqueService, private router: Router) { }
+  constructor(private estoqueService: EstoqueService, private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    if (!this.authService.isLoggedIn()) {
+      this.authService.setRedirectUrl(this.router.url);
+      this.router.navigate(['/login']);
+    }
   }
 
   saveEstoque(): void {
